@@ -1,0 +1,15 @@
+# docker-compose.yml
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app               # ホストのプロジェクトディレクトリをマウント
+      - /app/node_modules     # node_modulesをコンテナ専用の空間にマウント
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true   # ファイル監視用にPollingを有効にする
