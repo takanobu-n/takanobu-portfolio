@@ -18,7 +18,7 @@ const TechStackSection = () => {
   ];
 
   return (
-    <section className="py-8 bg-gray-900 text-white">
+    <section className="container mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-4">技術スタック</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {techStacks.map((tech, index) => (

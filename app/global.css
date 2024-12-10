@@ -31,6 +31,8 @@
 
 html {
   min-width: 360px;
+  @apply flex flex-col items-center justify-center;
+  width: 100vw; /* 必要に応じて追加 */
 }
 
 .prose .anchor {
@@ -147,4 +149,9 @@ table {
 
 .title {
   text-wrap: balance;
+}
+
+body {
+  @apply flex flex-col items-center justify-center min-h-screen w-full;
+  width: 100vw; /* 常にビューポート幅を占める */
 }
