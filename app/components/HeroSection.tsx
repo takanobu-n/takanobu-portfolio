@@ -9,7 +9,6 @@ const HeroSection = () => {
           alt="Profile Icon"
           width={240}
           height={240}
-          className="rounded-full"
         />
       </div>
       <h1 className="text-3xl font-bold mt-4">Nakaoka Takanobu</h1>

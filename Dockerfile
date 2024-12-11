@@ -6,6 +6,7 @@ WORKDIR /app
 
 # pnpmのインストール
 RUN npm install -g pnpm
+RUN npm intall react-icons
 
 # ホストのソースコードがマウントされるため、デフォルトのpackage.jsonは空のままでOK
 COPY package.json pnpm-lock.yaml ./

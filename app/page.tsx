@@ -2,7 +2,7 @@ import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import QualificationSection from './components/QualificationSection';
 import TechStackSection from './components/TechStackSection';
-import { BlogPosts } from 'app/components/posts';
+// import { BlogPosts } from 'app/components/posts';
 
 export default function Page() {
   return (
@@ -20,9 +20,9 @@ export default function Page() {
       <TechStackSection />
 
       {/* Blog Posts Section */}
-      <div className="my-8">
+      {/* <div className="my-8">
         <BlogPosts />
-      </div>
+      </div> */}
     </main>
   );
 }

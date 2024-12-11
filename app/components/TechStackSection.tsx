@@ -1,20 +1,22 @@
+import { FaPython, FaReact, FaDocker, FaGit, FaGithub } from 'react-icons/fa';
+import { SiRubyonrails, SiNextdotjs, SiTypescript, SiHtml5, SiCss3, SiJavascript, SiTailwindcss, SiVisualstudiocode } from 'react-icons/si';
 import IconCard from './IconCard';
 
 const TechStackSection = () => {
   const techStacks = [
-    { icon: '🐍', label: 'Python' },
-    { icon: '⚙️', label: 'Rails' },
-    { icon: '⚛️', label: 'React' },
-    { icon: '🌐', label: 'Next.js' },
-    { icon: '🛠️', label: 'TypeScript' },
-    { icon: '📄', label: 'HTML' },
-    { icon: '🎨', label: 'CSS' },
-    { icon: '📜', label: 'JavaScript' },
-    { icon: '💅', label: 'TailwindCSS' },
-    { icon: '🐳', label: 'Docker' },
-    { icon: '🐙', label: 'GitHub' },
-    { icon: '🔧', label: 'Git' },
-    { icon: '🖥️', label: 'VSCode' },
+    { icon: FaPython, label: 'Python' },
+    { icon: SiRubyonrails, label: 'Rails' },
+    { icon: FaReact, label: 'React' },
+    { icon: SiNextdotjs, label: 'Next.js' },
+    { icon: SiTypescript, label: 'TypeScript' },
+    { icon: SiHtml5, label: 'HTML' },
+    { icon: SiCss3, label: 'CSS' },
+    { icon: SiJavascript, label: 'JavaScript' },
+    { icon: SiTailwindcss, label: 'TailwindCSS' },
+    { icon: FaDocker, label: 'Docker' },
+    { icon: FaGithub, label: 'GitHub' },
+    { icon: FaGit, label: 'Git' },
+    { icon: SiVisualstudiocode, label: 'VSCode' },
   ];
 
   return (
