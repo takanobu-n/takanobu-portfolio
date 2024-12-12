@@ -1,22 +1,21 @@
-import { FaPython, FaReact, FaDocker, FaGit, FaGithub } from 'react-icons/fa';
-import { SiRubyonrails, SiNextdotjs, SiTypescript, SiHtml5, SiCss3, SiJavascript, SiTailwindcss, SiVisualstudiocode } from 'react-icons/si';
+import { FaPython, FaReact, FaHtml5, FaCss3Alt, FaDocker, FaGithub, FaGit } from 'react-icons/fa';
+import { SiRubyonrails, SiNextdotjs, SiTypescript, SiTailwindcss, SiJavascript } from 'react-icons/si';
 import IconCard from './IconCard';
 
 const TechStackSection = () => {
   const techStacks = [
-    { icon: FaPython, label: 'Python' },
-    { icon: SiRubyonrails, label: 'Rails' },
-    { icon: FaReact, label: 'React' },
-    { icon: SiNextdotjs, label: 'Next.js' },
-    { icon: SiTypescript, label: 'TypeScript' },
-    { icon: SiHtml5, label: 'HTML' },
-    { icon: SiCss3, label: 'CSS' },
-    { icon: SiJavascript, label: 'JavaScript' },
-    { icon: SiTailwindcss, label: 'TailwindCSS' },
-    { icon: FaDocker, label: 'Docker' },
-    { icon: FaGithub, label: 'GitHub' },
-    { icon: FaGit, label: 'Git' },
-    { icon: SiVisualstudiocode, label: 'VSCode' },
+    { icon: <FaPython style={{ color: '#306998' }} />, label: 'Python' }, // 青
+    { icon: <SiRubyonrails style={{ color: '#CC0000' }} />, label: 'Rails' }, // 赤
+    { icon: <FaReact style={{ color: '#61DAFB' }} />, label: 'React' }, // 青
+    { icon: <SiNextdotjs style={{ color: '#000000' }} />, label: 'Next.js' }, // 黒
+    { icon: <SiTypescript style={{ color: '#3178C6' }} />, label: 'TypeScript' }, // 青
+    { icon: <FaHtml5 style={{ color: '#E34F26' }} />, label: 'HTML' }, // オレンジ
+    { icon: <FaCss3Alt style={{ color: '#1572B6' }} />, label: 'CSS' }, // 青
+    { icon: <SiJavascript style={{ color: '#F7DF1E' }} />, label: 'JavaScript' }, // 黄色
+    { icon: <SiTailwindcss style={{ color: '#06B6D4' }} />, label: 'TailwindCSS' }, // 青緑
+    { icon: <FaDocker style={{ color: '#2496ED' }} />, label: 'Docker' }, // 青
+    { icon: <FaGithub style={{ color: '#181717' }} />, label: 'GitHub' }, // 黒
+    { icon: <FaGit style={{ color: '#F05032' }} />, label: 'Git' }, // オレンジ
   ];
 
   return (
