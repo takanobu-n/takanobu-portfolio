@@ -16,10 +16,14 @@ const ScrollToTopButton: React.FC = () => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    const scrollStep = -window.scrollY / 30; // 調整: スクロールのステップを設定 (30は速度調整用)
+    const scrollInterval = () => {
+      if (window.scrollY !== 0) {
+        window.scrollBy(0, scrollStep);
+        requestAnimationFrame(scrollInterval);
+      }
+    };
+    requestAnimationFrame(scrollInterval);
   };
 
   return (
