@@ -7,7 +7,8 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Footer from './components/footer';
 import { baseUrl } from './sitemap';
-import ScrollToTopButton from './components/ScrollToTopButton'; // スクロールボタンをインポート
+import ScrollToTopButton from './components/ScrollToTopButton';
+import WelcomeScreen from './components/WelcomeScreen'; // Welcome画面を別コンポーネント化
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -35,6 +36,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  icons: {
+    icon: '/favicon.ico', // `public/favicon.ico` を参照
+  },
 };
 
 const cx = (...classes: string[]) => classes.filter(Boolean).join(' ');
@@ -54,14 +58,16 @@ export default function RootLayout({
       )}
     >
       <body className="antialiased max-w-xl mx-4 mt-8 lg:mx-auto">
-        <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
-          <Navbar />
-          {children}
-          <Footer />
-          <ScrollToTopButton /> {/* スクロールボタンをここに追加 */}
-          <Analytics />
-          <SpeedInsights />
-        </main>
+        <WelcomeScreen>
+          <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
+            <Navbar />
+            {children}
+            <Footer />
+            <ScrollToTopButton />
+            <Analytics />
+            <SpeedInsights />
+          </main>
+        </WelcomeScreen>
       </body>
     </html>
   );

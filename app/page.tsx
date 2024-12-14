@@ -1,5 +1,4 @@
 import HeroSection from './components/HeroSection';
-import AboutSection from './components/AboutSection';
 import QualificationSection from './components/QualificationSection';
 import TechStackSection from './components/TechStackSection';
 // import { BlogPosts } from 'app/components/posts';
@@ -9,9 +8,6 @@ export default function Page() {
     <main>
       {/* Hero Section */}
       <HeroSection />
-
-      {/* About Section */}
-      <AboutSection />
 
       {/* Qualification Section */}
       <QualificationSection />
