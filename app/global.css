@@ -29,11 +29,22 @@
   }
 }
 
+/* 横スクロールを完全に無効化 */
+html, body {
+  overflow-x: hidden; /* 横スクロールを防止 */
+  box-sizing: border-box; /* ボックスモデルの調整 */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit; /* ボックスモデルを統一 */
+}
+
 html {
-  min-width: 360px;
-  @apply flex flex-col items-center justify-center;
-  width: 100vw; /* 必要に応じて追加 */
-  scroll-behavior: smooth; /* スムーズなスクロールを維持 */
+  width: 100%; /* 100vwではなく100%を使用 */
+  margin: 0;
+  padding: 0;
 }
 
 .prose .anchor {
@@ -153,6 +164,12 @@ table {
 }
 
 body {
+  max-width: 100%; /* ビューポートを超えないようにする */
   margin: 0;
   padding: 0;
+}
+
+.main {
+  max-width: 100%; /* 必要に応じて幅を制限 */
+  overflow-x: hidden;
 }
