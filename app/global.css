@@ -33,6 +33,7 @@ html {
   min-width: 360px;
   @apply flex flex-col items-center justify-center;
   width: 100vw; /* 必要に応じて追加 */
+  scroll-behavior: smooth; /* スムーズなスクロールを維持 */
 }
 
 .prose .anchor {
@@ -152,6 +153,6 @@ table {
 }
 
 body {
-  @apply flex flex-col items-center justify-center min-h-screen w-full;
-  width: 100vw; /* 常にビューポート幅を占める */
+  margin: 0;
+  padding: 0;
 }

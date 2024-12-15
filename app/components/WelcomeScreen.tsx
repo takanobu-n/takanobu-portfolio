@@ -10,38 +10,29 @@ export default function WelcomeScreen({
   const [showWelcome, setShowWelcome] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
 
-  // ビューポートの高さを正確に設定
   useEffect(() => {
-    const setViewportHeight = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-    setViewportHeight();
-    window.addEventListener('resize', setViewportHeight);
+    // 初期状態でスクロール無効化
+    document.body.style.overflow = 'hidden';
 
-    return () => {
-      window.removeEventListener('resize', setViewportHeight);
-    };
-  }, []);
-
-  useEffect(() => {
     const fadeOutTimer = setTimeout(() => {
       setFadeOut(true);
     }, 2000); // 2秒後にフェードアウト開始
 
     const hideWelcomeTimer = setTimeout(() => {
       setShowWelcome(false);
+      document.body.style.overflow = 'auto'; // Welcome画面終了後スクロール有効化
     }, 3000); // 3秒後にWelcome画面を完全に非表示
 
     return () => {
       clearTimeout(fadeOutTimer);
       clearTimeout(hideWelcomeTimer);
+      document.body.style.overflow = 'auto'; // クリーンアップ時もスクロール有効化
     };
   }, []);
 
   return showWelcome ? (
     <div
-      className={`flex items-center justify-center h-[calc(var(--vh)*100)] w-full bg-black text-white transition-opacity duration-1000 ${
+      className={`flex items-center justify-center h-screen w-full bg-black text-white transition-opacity duration-1000 ${
         fadeOut ? 'opacity-0' : 'opacity-100'
       }`}
     >
@@ -50,7 +41,7 @@ export default function WelcomeScreen({
           fadeOut ? 'scale-50' : 'scale-150'
         }`}
         style={{
-          fontSize: '10vw', // ビューポート幅に応じた文字サイズ
+          fontSize: 'clamp(2rem, 10vw, 5rem)', // フォントサイズ調整
           textTransform: 'uppercase',
         }}
       >
