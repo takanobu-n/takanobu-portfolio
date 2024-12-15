@@ -1,5 +1,5 @@
 # Dockerfile
-FROM node:latest
+FROM node:lts
 
 # 作業ディレクトリを設定
 WORKDIR /app
@@ -7,6 +7,7 @@ WORKDIR /app
 # pnpmのインストール
 RUN npm install -g pnpm
 RUN npm install react-icons
+RUN npm install framer-motion
 
 # ホストのソースコードがマウントされるため、デフォルトのpackage.jsonは空のままでOK
 COPY package.json pnpm-lock.yaml ./
