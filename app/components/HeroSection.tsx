@@ -19,7 +19,7 @@ const HeroSection = () => {
         <div className="flex flex-col items-center">
           <div className="rounded-full overflow-hidden p-2">
             <Image
-              src="/training_rabbit.jpg"
+              src="/training_rabbit.png"
               alt="Profile Icon"
               width={240}
               height={240}
