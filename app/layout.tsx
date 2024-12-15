@@ -13,16 +13,16 @@ import WelcomeScreen from './components/WelcomeScreen'; // Welcome画面を別�
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Next.js Portfolio Starter',
-    template: '%s | Next.js Portfolio Starter',
+    default: '仲岡誉修のポートフォリオ',
+    template: '%s | 仲岡誉修のポートフォリオ',
   },
-  description: 'This is my portfolio.',
+  description: '仲岡誉修のポートフォリオです。これまでの実績やスキル、プロジェクトについてご紹介しています。',
   openGraph: {
-    title: 'My Portfolio',
-    description: 'This is my portfolio.',
+    title: '仲岡誉修のポートフォリオ',
+    description: '仲岡誉修のポートフォリオです。これまでの実績やスキル、プロジェクトについてご紹介しています。',
     url: baseUrl,
-    siteName: 'My Portfolio',
-    locale: 'en_US',
+    siteName: '仲岡誉修のポートフォリオ',
+    locale: 'ja_JP',
     type: 'website',
   },
   robots: {
@@ -50,7 +50,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="ja" // 日本語対応
       className={cx(
         'text-black bg-white dark:text-white dark:bg-black',
         GeistSans.variable,
