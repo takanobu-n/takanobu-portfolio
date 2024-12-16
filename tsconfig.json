@@ -15,6 +15,9 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "incremental": true,
+    "paths": {
+      "@/app/*": ["app/*"]
+    },
     "plugins": [
       {
         "name": "next"
