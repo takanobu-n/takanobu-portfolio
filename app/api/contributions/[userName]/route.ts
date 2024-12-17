@@ -33,30 +33,30 @@ export async function GET(
       }
     `;
   
+    // route.ts
     try {
-        console.log("GraphQLクエリ送信中:", query, { userName, now, sixMonthBefore });
-      
-        const contributions = await octokit.graphql<Contributions>(query, {
-          userName,
-          now,
-          sixMonthBefore,
-        });
-      
-        console.log("GraphQLクエリ成功:", contributions);
-      
-        const contributionCount: number[] = [];
-        contributions.user.contributionsCollection.contributionCalendar.weeks.forEach((week) => {
-          week.contributionDays.forEach((day) => {
-            contributionCount.push(day.contributionCount);
-          });
-        });
-      
-        return NextResponse.json({ values: contributionCount });
-      } catch (error) {
-        console.error("GitHub APIエラー:", error);
-        return NextResponse.json(
-          { error: "GitHub APIのリクエスト中にエラーが発生しました。" },
-          { status: 500 }
-        );
-      }
+      console.log("GraphQLクエリ送信中:", query, { userName, now, sixMonthBefore });
+
+      const contributions = await octokit.graphql<Contributions>(query, {
+        userName,
+        now,
+        sixMonthBefore,
+      });
+
+      console.log("GraphQLクエリ成功:", contributions);
+
+      // 週ごとにデータを整形
+      const weeks = contributions.user.contributionsCollection.contributionCalendar.weeks.map(
+        (week) => week.contributionDays.map((day) => day.contributionCount)
+      );
+
+      return NextResponse.json({ values: weeks });
+    } catch (error) {
+      console.error("GitHub APIエラー:", error);
+      return NextResponse.json(
+        { error: "GitHub APIのリクエスト中にエラーが発生しました。" },
+        { status: 500 }
+      );
+    }
+
   }

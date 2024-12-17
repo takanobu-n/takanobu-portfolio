@@ -173,3 +173,14 @@ body {
   max-width: 100%; /* 必要に応じて幅を制限 */
   overflow-x: hidden;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 16px);
+  grid-gap: 4px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
