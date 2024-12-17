@@ -1,18 +1,29 @@
 // 型をimportしておく
-import { MyContributes } from "@/app/pages/api/contributions/[userName]";
+import { MyContributes } from "@/app/types/contributions";
 
 // カスタムフック本体
 export const useContributions = () => {
-  
-  // userNameを引数に受け取り、先ほどの取得処理を行い、dataとして返す
   const getContributions = async (userName: string) => {
-    const response = await fetch(`../api/contributions/${userName}`);
-    const data: Promise<MyContributes> = await response.json();
-    return data;
+    try {
+      console.log("実行された");
+      const response = await fetch(`/api/contributions/${userName}`);
+      console.log("fetchリクエスト送信");
+
+      if (!response.ok) {
+        console.error("APIリクエスト失敗:", response.statusText);
+        return { values: [] }; // エラー時は空のデータを返す
+      }
+
+      const data: MyContributes = await response.json();
+      return data;
+    } catch (error) {
+      console.error("API呼び出し中のエラー:", error);
+      return { values: [] }; // 例外発生時も空のデータを返す
+    }
   };
 
-  // 関数を返却
   return {
     getContributions,
   };
 };
+
