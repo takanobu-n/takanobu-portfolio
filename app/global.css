@@ -17,6 +17,23 @@
   --sh-entity: #e25a1c;
 }
 
+@layer utilities {
+  .week-column {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .contribution-day {
+    width: 16px;
+    height: 16px;
+    background-color: #39D353;
+    border-radius: 4px;
+    transition: opacity 0.3s ease; /* 視覚的な滑らかさを追加 */
+  }
+}
+
+
 @media (prefers-color-scheme: dark) {
   :root {
     --sh-class: #4c97f8;
@@ -172,15 +189,4 @@ body {
 .main {
   max-width: 100%; /* 必要に応じて幅を制限 */
   overflow-x: hidden;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 16px);
-  grid-gap: 4px;
-}
-
-.flex {
-  display: flex;
-  flex-direction: column;
 }
