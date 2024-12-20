@@ -23,7 +23,7 @@ export const Contributions = () => {
   }, []);
 
   const createOpacity = (count: number) =>
-    count === 0 ? "0" : count <= 2 ? "0.2" : count <= 6 ? "0.4" : count <= 10 ? "0.6" : count <= 13 ? "0.8" : "1";
+    count === 0 ? "0.1" : count <= 2 ? "0.2" : count <= 6 ? "0.4" : count <= 10 ? "0.6" : count <= 13 ? "0.8" : "1";
 
   // 貢献数の合計を計算
   const totalContributions = myContributes.flat().reduce((sum, count) => sum + count, 0);
@@ -53,30 +53,6 @@ export const Contributions = () => {
             ))}
           </div>
         ))}
-      </div>
-
-      {/* 凡例の表示 */}
-      <div className="absolute bottom-4 right-4 text-sm">
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 bg-green-500 opacity-0.2" />
-          <span>0 - 2</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 bg-green-500 opacity-0.4" />
-          <span>3 - 6</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 bg-green-500 opacity-0.6" />
-          <span>7 - 10</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 bg-green-500 opacity-0.8" />
-          <span>11 - 13</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 bg-green-500 opacity-1" />
-          <span>14+</span>
-        </div>
       </div>
     </section>
   );

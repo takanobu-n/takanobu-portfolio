@@ -1,63 +1,27 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 import { Octokit } from "@octokit/core";
 import dayjs from "dayjs";
+import { Contributions } from "@/app/types/contributions";
 
-// レスポンスの型
-export type Contributions = {
-  user: {
-    contributionsCollection: {
-      contributionCalendar: {
-        weeks: [
-          {
-            contributionDays: [
-              {
-                date: string;
-                contributionCount: number;
-              }
-            ];
-          }
-        ];
-      };
-    };
-  };
-};
-
-// 最終的に描画時に利用するデータの型
-export type MyContributes = {
-  values: number[];
-};
-
-// メインとなる関数
-export default async function handler(
-  request: NextApiRequest,
-  response: NextApiResponse
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { userName: string } }
 ) {
-  // リクエストのクエリをuserNameに代入
-  const { userName } = request.query;
+  const { userName } = params;
 
-　  // インスタンスを作成し、認証情報として環境変数に定義したGitHubトークンを渡す
   const octokit = new Octokit({
     auth: process.env.NEXT_PUBLIC_GITHUB_TOKEN,
   });
 
-  // 現在の年月日と時刻を取得
-  const now = await dayjs().format("YYYY-MM-DDThh:mm:ss");
-  
-  // 6ヶ月前の年月日と時刻を取得
-  const sixMonthBefore = await dayjs()
-    .subtract(6, "month")
-    .format("YYYY-MM-DDThh:mm:ss");
+  // リクエストが送信された日付に基づいてその年の1月1日から12月31日までの期間を設定
+  const currentYear = dayjs().year();
+  const startOfYear = dayjs(`${currentYear}-01-01`).format("YYYY-MM-DDTHH:mm:ss");
+  const endOfYear = dayjs(`${currentYear}-12-31`).format("YYYY-MM-DDTHH:mm:ss");
 
-  /**
-   * クエリ部分
-   * @param userName ユーザー名
-   * @param now 現在の年月日
-   * @param sixMonthBefore 6ヶ月前の年月日
-   */
   const query = `
-    query contributions ($userName:String!, $now:DateTime!, $sixMonthBefore:DateTime!) {
+    query contributions($userName: String!, $startOfYear: DateTime!, $endOfYear: DateTime!) {
       user(login: $userName) {
-        contributionsCollection(to: $now, from: $sixMonthBefore) {
+        contributionsCollection(to: $endOfYear, from: $startOfYear) {
           contributionCalendar {
             weeks {
               contributionDays {
@@ -71,27 +35,28 @@ export default async function handler(
     }
   `;
 
-  // クエリとそれに必要な引数を渡し、octokitを使いデータを取得する
-  const contributions = await octokit.graphql<Contributions>(query, {
-    userName,
-    now,
-    sixMonthBefore,
-  });
+  try {
+    console.log("GraphQLクエリ送信中:", query, { userName, startOfYear, endOfYear });
 
-  // レスポンスからコミット数だけを抜き出し格納するための配列を定義
-  let contributionCount: number[] = [];
+    const contributions = await octokit.graphql<Contributions>(query, {
+      userName,
+      startOfYear,
+      endOfYear,
+    });
 
-  // ループさせコミット数のみを配列にpushする       
-  contributions.user.contributionsCollection.contributionCalendar.weeks.forEach(
-    (week) => {
-      week.contributionDays.forEach((contributionDay) => {
-        contributionCount.push(contributionDay.contributionCount);
-      });
-    }
-  );
+    console.log("GraphQLクエリ成功:", contributions);
 
-  // コミット数のみ格納された配列を返却
-  return response.status(200).json({
-    values: contributionCount,
-  });
+    // 週ごとにデータを整形
+    const weeks = contributions.user.contributionsCollection.contributionCalendar.weeks.map(
+      (week) => week.contributionDays.map((day) => day.contributionCount)
+    );
+
+    return NextResponse.json({ values: weeks });
+  } catch (error) {
+    console.error("GitHub APIエラー:", error);
+    return NextResponse.json(
+      { error: "GitHub APIのリクエスト中にエラーが発生しました。" },
+      { status: 500 }
+    );
+  }
 }
